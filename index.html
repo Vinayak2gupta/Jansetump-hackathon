@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JanSetu — Find Your Government Benefits, Resolve Delays</title>
+  <meta name="description" content="JanSetu helps citizens discover welfare schemes, scholarships and agricultural aid they qualify for, and escalate disbursement delays through one integrated grievance pathway." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            gov: { 900: '#0b2d4d', 800: '#0f3d63', 700: '#134e78', 600: '#1a5f8f' },
+          },
+        },
+      },
+    }
+  </script>
+  <link rel="stylesheet" href="/assets/css/styles.css" />
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js" defer></script>
+  <script src="/assets/js/main.js" defer></script>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased">
+  <a href="#main" class="skip-link absolute -left-full top-0 bg-white p-2 text-gov-800">Skip to content</a>
+
+  <!-- Header -->
+  <header class="sticky top-0 z-40 border-b border-slate-200 bg-white/95 backdrop-blur">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
+      <a href="/" class="flex items-center gap-2 font-bold text-gov-800">
+        <span class="flex h-9 w-9 items-center justify-center rounded-lg bg-gov-800 text-white">
+          <i data-lucide="landmark" class="h-5 w-5"></i>
+        </span>
+        <span class="text-lg">JanSetu</span>
+      </a>
+      <nav class="hidden items-center gap-8 md:flex" aria-label="Primary">
+        <a href="/" class="nav-link text-sm text-slate-600 hover:text-gov-800">Home</a>
+        <a href="/schemes.html" class="nav-link text-sm text-slate-600 hover:text-gov-800">Knowledge Base</a>
+        <a href="/eligibility.html" class="nav-link text-sm text-slate-600 hover:text-gov-800">Check Eligibility</a>
+        <a href="/grievance.html" class="nav-link text-sm text-slate-600 hover:text-gov-800">Grievance Redressal</a>
+      </nav>
+      <a href="/grievance.html" class="hidden rounded-lg bg-amber-600 px-4 py-2 text-sm font-semibold text-white hover:bg-amber-700 md:inline-block">
+        Report an Issue
+      </a>
+      <button id="mobile-nav-toggle" aria-expanded="false" aria-controls="mobile-nav" class="md:hidden" aria-label="Toggle menu">
+        <i data-lucide="menu" class="h-6 w-6 text-gov-800"></i>
+      </button>
+    </div>
+    <nav id="mobile-nav" class="hidden border-t border-slate-200 bg-white px-4 py-3 md:hidden" aria-label="Primary mobile">
+      <a href="/" class="nav-link block py-2 text-slate-600">Home</a>
+      <a href="/schemes.html" class="nav-link block py-2 text-slate-600">Knowledge Base</a>
+      <a href="/eligibility.html" class="nav-link block py-2 text-slate-600">Check Eligibility</a>
+      <a href="/grievance.html" class="nav-link block py-2 text-slate-600">Grievance Redressal</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <!-- Hero -->
+    <section class="overflow-hidden bg-gradient-to-b from-white to-slate-50">
+      <div class="mx-auto grid max-w-7xl items-center gap-10 px-4 py-14 sm:px-6 md:grid-cols-2 md:py-20 lg:px-8">
+        <div class="animate-fade-in">
+          <p class="mb-4 inline-flex items-center gap-2 rounded-full bg-teal-50 px-3 py-1 text-xs font-semibold text-teal-700">
+            <i data-lucide="sparkles" class="h-3.5 w-3.5"></i> Built for the MP Online Innovation Hackathon
+          </p>
+          <h1 class="text-4xl font-extrabold tracking-tight text-gov-900 sm:text-5xl">
+            Every benefit you qualify for. <span class="text-teal-600">One place to find it.</span>
+          </h1>
+          <p class="mt-5 text-lg leading-relaxed text-slate-600">
+            Welfare schemes, scholarships and farm subsidies are scattered across dozens of departmental
+            portals. JanSetu brings them into a single searchable knowledge base, tells you in plain
+            language what you qualify for, and gives you a direct path to escalate when your money or
+            approval is stuck.
+          </p>
+          <div class="mt-8 flex flex-wrap gap-4">
+            <a href="/eligibility.html" class="inline-flex items-center gap-2 rounded-lg bg-gov-800 px-6 py-3 font-semibold text-white shadow-sm hover:bg-gov-700">
+              <i data-lucide="wand-2" class="h-5 w-5"></i> Check What I'm Eligible For
+            </a>
+            <a href="/schemes.html" class="inline-flex items-center gap-2 rounded-lg border border-slate-300 bg-white px-6 py-3 font-semibold text-slate-700 hover:border-gov-700 hover:text-gov-800">
+              <i data-lucide="search" class="h-5 w-5"></i> Browse All Schemes
+            </a>
+          </div>
+          <p class="mt-6 flex items-center gap-2 text-sm text-slate-500">
+            <i data-lucide="shield-check" class="h-4 w-4 text-teal-600"></i>
+            Independent citizen-facing prototype — not an official government portal.
+          </p>
+        </div>
+        <div class="animate-fade-in">
+          <img
+            src="/.netlify/images?url=/img/hero.png&w=760&fm=webp&q=82"
+            width="760"
+            height="424"
+            alt="Illustration of citizens — a student, a farmer and a woman — accessing government welfare services on a shared digital kiosk"
+            class="w-full rounded-2xl shadow-lg"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- Problem statement strip -->
+    <section class="border-y border-slate-200 bg-white">
+      <div class="mx-auto grid max-w-7xl gap-8 px-4 py-12 sm:px-6 md:grid-cols-3 lg:px-8">
+        <div class="flex gap-4">
+          <i data-lucide="layers" class="h-8 w-8 flex-shrink-0 text-amber-600"></i>
+          <div>
+            <h3 class="font-semibold text-gov-900">Fragmented information</h3>
+            <p class="mt-1 text-sm text-slate-600">Schemes live on dozens of siloed department websites, so eligible citizens simply never hear about them.</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <i data-lucide="file-question" class="h-8 w-8 flex-shrink-0 text-amber-600"></i>
+          <div>
+            <h3 class="font-semibold text-gov-900">Confusing eligibility rules</h3>
+            <p class="mt-1 text-sm text-slate-600">Bureaucratic language makes it hard for citizens to know if they qualify without visiting an office.</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <i data-lucide="clock-alert" class="h-8 w-8 flex-shrink-0 text-amber-600"></i>
+          <div>
+            <h3 class="font-semibold text-gov-900">No clear redressal path</h3>
+            <p class="mt-1 text-sm text-slate-600">When a direct benefit transfer stalls or an application is rejected, there's no obvious next step.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Categories -->
+    <section class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+      <div class="mb-10 flex items-end justify-between">
+        <div>
+          <h2 class="text-2xl font-bold text-gov-900">Explore by category</h2>
+          <p class="mt-1 text-slate-600">A centralised knowledge base spanning the schemes citizens ask about most.</p>
+        </div>
+        <a href="/schemes.html" class="hidden text-sm font-semibold text-teal-700 hover:text-teal-800 sm:inline-flex">View all →</a>
+      </div>
+      <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <a href="/schemes.html?category=Higher+Education" class="scheme-card group rounded-xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-md">
+          <i data-lucide="graduation-cap" class="h-8 w-8 text-gov-700"></i>
+          <h3 class="mt-4 font-semibold text-gov-900">Higher Education</h3>
+          <p class="mt-1 text-sm text-slate-600">Tuition reimbursement, loan interest subsidy & coaching support.</p>
+        </a>
+        <a href="/schemes.html?category=Scholarships" class="scheme-card group rounded-xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-md">
+          <i data-lucide="award" class="h-8 w-8 text-gov-700"></i>
+          <h3 class="mt-4 font-semibold text-gov-900">Scholarships</h3>
+          <p class="mt-1 text-sm text-slate-600">Post-matric, minority, girl-child and disability scholarships.</p>
+        </a>
+        <a href="/schemes.html?category=Agriculture" class="scheme-card group rounded-xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-md">
+          <i data-lucide="sprout" class="h-8 w-8 text-gov-700"></i>
+          <h3 class="mt-4 font-semibold text-gov-900">Agriculture</h3>
+          <p class="mt-1 text-sm text-slate-600">Income support, crop insurance and low-interest farm credit.</p>
+        </a>
+        <a href="/schemes.html?category=Women+Welfare" class="scheme-card group rounded-xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-md">
+          <i data-lucide="heart-handshake" class="h-8 w-8 text-gov-700"></i>
+          <h3 class="mt-4 font-semibold text-gov-900">Women Welfare</h3>
+          <p class="mt-1 text-sm text-slate-600">Girl-child savings, maternity benefit & marriage assistance.</p>
+        </a>
+      </div>
+    </section>
+
+    <!-- How it works -->
+    <section class="bg-gov-900 py-16 text-white">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <h2 class="text-2xl font-bold">How JanSetu works</h2>
+        <p class="mt-1 max-w-2xl text-slate-300">From discovering a scheme to getting a stuck payment resolved — three steps, one platform.</p>
+        <div class="mt-10 grid gap-8 md:grid-cols-3">
+          <div class="rounded-xl bg-white/5 p-6 ring-1 ring-white/10">
+            <span class="flex h-10 w-10 items-center justify-center rounded-full bg-teal-500 font-bold">1</span>
+            <h3 class="mt-4 font-semibold">Discover</h3>
+            <p class="mt-2 text-sm text-slate-300">Search or filter the categorised knowledge base of state and central schemes.</p>
+          </div>
+          <div class="rounded-xl bg-white/5 p-6 ring-1 ring-white/10">
+            <span class="flex h-10 w-10 items-center justify-center rounded-full bg-teal-500 font-bold">2</span>
+            <h3 class="mt-4 font-semibold">Check eligibility</h3>
+            <p class="mt-2 text-sm text-slate-300">Describe your situation in plain words — no jargon — and get matched schemes instantly.</p>
+          </div>
+          <div class="rounded-xl bg-white/5 p-6 ring-1 ring-white/10">
+            <span class="flex h-10 w-10 items-center justify-center rounded-full bg-teal-500 font-bold">3</span>
+            <h3 class="mt-4 font-semibold">Resolve delays</h3>
+            <p class="mt-2 text-sm text-slate-300">Escalate a stuck DBT, rejection or technical error straight from a scheme's profile.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="mx-auto max-w-7xl px-4 py-16 text-center sm:px-6 lg:px-8">
+      <h2 class="text-2xl font-bold text-gov-900">Not sure where to start?</h2>
+      <p class="mx-auto mt-2 max-w-xl text-slate-600">Tell us a little about yourself and we'll match you to schemes you may already qualify for.</p>
+      <a href="/eligibility.html" class="mt-6 inline-flex items-center gap-2 rounded-lg bg-amber-600 px-6 py-3 font-semibold text-white hover:bg-amber-700">
+        <i data-lucide="wand-2" class="h-5 w-5"></i> Start the Eligibility Check
+      </a>
+    </section>
+  </main>
+
+  <footer class="border-t border-slate-200 bg-white">
+    <div class="mx-auto max-w-7xl px-4 py-10 text-sm text-slate-500 sm:px-6 lg:px-8">
+      <div class="flex flex-col items-start justify-between gap-6 md:flex-row md:items-center">
+        <div class="flex items-center gap-2 font-semibold text-gov-800">
+          <i data-lucide="landmark" class="h-4 w-4"></i> JanSetu
+        </div>
+        <nav class="flex flex-wrap gap-6" aria-label="Footer">
+          <a href="/" class="hover:text-gov-800">Home</a>
+          <a href="/schemes.html" class="hover:text-gov-800">Knowledge Base</a>
+          <a href="/eligibility.html" class="hover:text-gov-800">Eligibility Checker</a>
+          <a href="/grievance.html" class="hover:text-gov-800">Grievance Redressal</a>
+        </nav>
+      </div>
+      <p class="mt-6 max-w-3xl">
+        JanSetu is an independent citizen-facing prototype built for the MP Online Innovation Hackathon. Scheme
+        information is illustrative and simplified for demonstration; always verify current rules on the linked
+        official department portal before applying.
+      </p>
+    </div>
+  </footer>
+</body>
+</html>

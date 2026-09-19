@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Check Your Eligibility — JanSetu</title>
+  <meta name="description" content="Describe your situation in plain language and get matched instantly to welfare schemes, scholarships and agricultural aid you may qualify for." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { theme: { extend: { colors: { gov: { 900: '#0b2d4d', 800: '#0f3d63', 700: '#134e78', 600: '#1a5f8f' } } } } }
+  </script>
+  <link rel="stylesheet" href="/assets/css/styles.css" />
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js" defer></script>
+  <script src="/assets/js/main.js" defer></script>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased">
+  <a href="#main" class="skip-link absolute -left-full top-0 bg-white p-2 text-gov-800">Skip to content</a>
+
+  <header class="sticky top-0 z-40 border-b border-slate-200 bg-white/95 backdrop-blur">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
+      <a href="/" class="flex items-center gap-2 font-bold text-gov-800">
+        <span class="flex h-9 w-9 items-center justify-center rounded-lg bg-gov-800 text-white">
+          <i data-lucide="landmark" class="h-5 w-5"></i>
+        </span>
+        <span class="text-lg">JanSetu</span>
+      </a>
+      <nav class="hidden items-center gap-8 md:flex" aria-label="Primary">
+        <a href="/" class="nav-link text-sm text-slate-600 hover:text-gov-800">Home</a>
+        <a href="/schemes.html" class="nav-link text-sm text-slate-600 hover:text-gov-800">Knowledge Base</a>
+        <a href="/eligibility.html" class="nav-link text-sm text-slate-600 hover:text-gov-800">Check Eligibility</a>
+        <a href="/grievance.html" class="nav-link text-sm text-slate-600 hover:text-gov-800">Grievance Redressal</a>
+      </nav>
+      <a href="/grievance.html" class="hidden rounded-lg bg-amber-600 px-4 py-2 text-sm font-semibold text-white hover:bg-amber-700 md:inline-block">
+        Report an Issue
+      </a>
+      <button id="mobile-nav-toggle" aria-expanded="false" aria-controls="mobile-nav" class="md:hidden" aria-label="Toggle menu">
+        <i data-lucide="menu" class="h-6 w-6 text-gov-800"></i>
+      </button>
+    </div>
+    <nav id="mobile-nav" class="hidden border-t border-slate-200 bg-white px-4 py-3 md:hidden" aria-label="Primary mobile">
+      <a href="/" class="nav-link block py-2 text-slate-600">Home</a>
+      <a href="/schemes.html" class="nav-link block py-2 text-slate-600">Knowledge Base</a>
+      <a href="/eligibility.html" class="nav-link block py-2 text-slate-600">Check Eligibility</a>
+      <a href="/grievance.html" class="nav-link block py-2 text-slate-600">Grievance Redressal</a>
+    </nav>
+  </header>
+
+  <main id="main" class="mx-auto max-w-4xl px-4 py-10 sm:px-6 lg:px-8">
+    <div class="text-center">
+      <span class="mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-teal-50">
+        <i data-lucide="wand-2" class="h-6 w-6 text-teal-700"></i>
+      </span>
+      <h1 class="mt-4 text-3xl font-bold text-gov-900">What am I eligible for?</h1>
+      <p class="mx-auto mt-2 max-w-xl text-slate-600">
+        Describe yourself in your own words — your background, category, occupation, or situation. No forms,
+        no jargon. We'll match you against the knowledge base instantly.
+      </p>
+    </div>
+
+    <form id="eligibility-form" class="mt-8 rounded-xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
+      <label for="description" class="text-sm font-semibold text-gov-900">Tell us about yourself</label>
+      <textarea
+        id="description"
+        rows="4"
+        placeholder="e.g. I'm a farmer with 2 acres of land in Madhya Pradesh and my crop was damaged in last month's rain."
+        class="mt-2 w-full rounded-lg border border-slate-300 p-3 text-sm focus:border-gov-700 focus:outline-none focus:ring-2 focus:ring-gov-700/20"
+      ></textarea>
+
+      <div class="mt-3 flex flex-wrap gap-2">
+        <span class="text-xs text-slate-500">Try:</span>
+        <button type="button" data-example data-text="I'm a farmer with 2 acres of land in Madhya Pradesh and my crop was damaged in last month's rain." class="rounded-full border border-slate-200 px-3 py-1 text-xs text-slate-600 hover:border-gov-700 hover:text-gov-800">Farmer whose crop was damaged</button>
+        <button type="button" data-example data-text="My daughter is studying in class 11, we are OBC and our family income is low." class="rounded-full border border-slate-200 px-3 py-1 text-xs text-slate-600 hover:border-gov-700 hover:text-gov-800">OBC student in class 11, low income family</button>
+        <button type="button" data-example data-text="I am pregnant with my first child and need financial support." class="rounded-full border border-slate-200 px-3 py-1 text-xs text-slate-600 hover:border-gov-700 hover:text-gov-800">Pregnant, first child</button>
+        <button type="button" data-example data-text="I am part of a women's self-help group and we want a business loan." class="rounded-full border border-slate-200 px-3 py-1 text-xs text-slate-600 hover:border-gov-700 hover:text-gov-800">Women's self-help group needs a loan</button>
+      </div>
+
+      <button type="submit" class="mt-5 inline-flex items-center gap-2 rounded-lg bg-gov-800 px-6 py-3 font-semibold text-white hover:bg-gov-700">
+        <i data-lucide="search" class="h-5 w-5"></i> Find My Schemes
+      </button>
+    </form>
+
+    <section id="results-section" class="mt-8 hidden">
+      <h2 class="flex items-center gap-2 text-lg font-bold text-gov-900">
+        <i data-lucide="list-checks" class="h-5 w-5 text-teal-600"></i> <span id="results-heading"></span>
+      </h2>
+      <div id="results-list" class="mt-4 grid gap-4"></div>
+    </section>
+
+    <div id="no-match" class="mt-8 hidden rounded-xl border border-dashed border-slate-300 bg-white p-8 text-center">
+      <i data-lucide="search-x" class="mx-auto h-10 w-10 text-slate-400"></i>
+      <p class="mt-3 font-medium text-slate-700">We couldn't confidently match a scheme to what you described</p>
+      <p class="mt-1 text-sm text-slate-500">Try adding details like your category, occupation, income level, or life stage — or browse the full knowledge base.</p>
+      <a href="/schemes.html" class="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-teal-700 hover:text-teal-800">
+        <i data-lucide="layout-grid" class="h-4 w-4"></i> Browse All Schemes
+      </a>
+    </div>
+  </main>
+
+  <footer class="mt-10 border-t border-slate-200 bg-white">
+    <div class="mx-auto max-w-7xl px-4 py-10 text-sm text-slate-500 sm:px-6 lg:px-8">
+      <div class="flex flex-col items-start justify-between gap-6 md:flex-row md:items-center">
+        <div class="flex items-center gap-2 font-semibold text-gov-800">
+          <i data-lucide="landmark" class="h-4 w-4"></i> JanSetu
+        </div>
+        <nav class="flex flex-wrap gap-6" aria-label="Footer">
+          <a href="/" class="hover:text-gov-800">Home</a>
+          <a href="/schemes.html" class="hover:text-gov-800">Knowledge Base</a>
+          <a href="/eligibility.html" class="hover:text-gov-800">Eligibility Checker</a>
+          <a href="/grievance.html" class="hover:text-gov-800">Grievance Redressal</a>
+        </nav>
+      </div>
+      <p class="mt-6 max-w-3xl">
+        The eligibility checker uses simple keyword matching against illustrative scheme data for demonstration
+        purposes. It is not a substitute for official eligibility verification.
+      </p>
+    </div>
+  </footer>
+
+  <script src="/assets/js/schemes-data.js"></script>
+  <script src="/assets/js/eligibility.js" defer></script>
+</body>
+</html>
