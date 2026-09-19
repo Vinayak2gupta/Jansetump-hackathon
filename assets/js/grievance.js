@@ -20,6 +20,11 @@
     var link = document.createElement('a'); link.href = URL.createObjectURL(blob); link.download = 'jansetu-grievance-record.txt'; link.click(); window.setTimeout(function () { URL.revokeObjectURL(link.href); }, 1000);
   }
   if (downloadButton) downloadButton.addEventListener('click', downloadGrievance);
+  if (grievanceForm) grievanceForm.addEventListener('submit', function (event) {
+    event.preventDefault();
+    downloadGrievance();
+    window.setTimeout(function () { window.location.href = 'thank-you.html'; }, 150);
+  });
   if (!input || !result) return;
   function track() { var value = input.value.trim(); if (!value) return; result.classList.remove('hidden'); status.textContent = value.includes('4409') ? 'Resolved / Payment Released' : 'In Department Review'; ticketScheme.textContent = value.includes('4409') ? 'Kisan Kalyan Yojana DBT second tranche delay' : 'MMVY engineering tuition disbursement delay'; ticketDepartment.textContent = value.includes('4409') ? 'Revenue & Agriculture Directorate, Gwalior' : 'Directorate of Technical Education, Bhopal'; }
   ticketForm.addEventListener('submit', function (event) { event.preventDefault(); track(); });

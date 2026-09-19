@@ -35,33 +35,8 @@
     });
     document.querySelectorAll('[data-i18n-key]').forEach(function (element) { element.textContent = t(element.getAttribute('data-i18n-key')); });
   }
-  async function translatePageContent() {
-    var language = getLanguage();
-    if (language === 'en') return;
-    var cacheKey = 'jansetu-ui-' + language + '-' + window.location.pathname;
-    var cached = JSON.parse(localStorage.getItem(cacheKey) || 'null');
-    var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
-    var nodes = []; var node;
-    while ((node = walker.nextNode())) {
-      var parent = node.parentElement;
-      var value = node.nodeValue.trim();
-      if (!value || !parent || parent.closest('#jansetu-chatbot, script, style, option, [data-lucide]') || parent.closest('header')) continue;
-      if (!node.__jansetuSource) node.__jansetuSource = node.nodeValue;
-      nodes.push(node);
-    }
-    var source = nodes.map(function (item) { return item.__jansetuSource; });
-    var signature = JSON.stringify(source);
-    function apply(translations) { nodes.forEach(function (item, index) { if (translations[index]) item.nodeValue = translations[index]; }); }
-    if (cached && cached.source === signature && Array.isArray(cached.translations)) { apply(cached.translations); return; }
-    try {
-      var batches = [];
-      for (var offset = 0; offset < source.length; offset += 60) batches.push(source.slice(offset, offset + 60));
-      var responses = await Promise.all(batches.map(function (texts) { return fetch('/api/chat', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ mode: 'translate-ui', language: language, texts: texts }) }); }));
-      var data = await Promise.all(responses.map(function (response) { return response.json().then(function (payload) { return { ok: response.ok, payload: payload }; }); }));
-      var translations = data.reduce(function (all, item) { return all.concat(item.payload.translations || []); }, []);
-      if (data.some(function (item) { return !item.ok; }) || translations.length !== source.length) throw new Error('Translation unavailable');
-      localStorage.setItem(cacheKey, JSON.stringify({ source: signature, translations: translations })); apply(translations);
-    } catch (error) { console.warn('JanSetu translation unavailable', error); }
+  function translatePageContent() {
+    // The authored page copy remains available in English when no translation service is configured.
   }
   function addLanguageSwitcher() {
     if (document.getElementById('language-switcher')) return;
@@ -97,11 +72,9 @@
     function setOpen(open) { panel.classList.toggle('hidden', !open); launcher.setAttribute('aria-expanded', String(open)); if (open) input.focus(); }
     launcher.addEventListener('click', function () { setOpen(panel.classList.contains('hidden')); });
     document.getElementById('chatbot-close').addEventListener('click', function () { setOpen(false); launcher.focus(); });
-    document.getElementById('chatbot-form').addEventListener('submit', async function (event) {
+    document.getElementById('chatbot-form').addEventListener('submit', function (event) {
       event.preventDefault(); var question = input.value.trim(); if (!question) return; addMessage(question, 'user'); history.push({ role: 'user', content: question }); input.value = ''; input.disabled = true;
-      try { var response = await fetch('/api/chat', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ messages: history.slice(-8), language: getLanguage() }) }); var data = await response.json(); if (!response.ok) throw new Error(data.error || 'Request failed'); addMessage(data.reply, 'bot'); history.push({ role: 'assistant', content: data.reply }); }
-      catch (error) { addMessage(localChatReply(question), 'bot'); }
-      finally { input.disabled = false; input.focus(); }
+      window.setTimeout(function () { addMessage(localChatReply(question), 'bot'); input.disabled = false; input.focus(); }, 180);
     });
     addMessage(t('chatHint'), 'bot'); if (window.lucide) window.lucide.createIcons();
   }

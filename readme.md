@@ -14,9 +14,9 @@ them a direct path to escalate delayed benefit transfers or rejected application
   AICTE internship, National Career Service, and Madhya Pradesh employment-learning resources.
 - **Eligibility Checker** (`eligibility.html`) — citizens describe their situation in plain language and
   get matched to relevant schemes via a client-side keyword/tag matching engine.
-- **Grievance Redressal** (`grievance.html`) — a form (powered by Netlify Forms) for reporting delayed
-  DBTs, rejections, or technical errors, pre-filled with scheme context when linked from a scheme's detail
-  view or an eligibility match.
+- **Grievance Redressal** (`grievance.html`) — a client-side form that creates a downloadable grievance
+  record for delayed DBTs, rejections, or technical errors, pre-filled with scheme context when linked from
+  a scheme's detail view or an eligibility match.
 
 ## Tech stack
 
@@ -24,9 +24,9 @@ them a direct path to escalate delayed benefit transfers or rejected application
 - Tailwind CSS (via CDN) for styling
 - Vanilla JavaScript for search, filtering, the eligibility matcher, and form pre-fill
 - [Lucide icons](https://lucide.dev/) via CDN
-- Netlify Forms for grievance submissions
-- Netlify Image CDN for the hero illustration (`/img/hero.png`, generated once via Netlify AI Gateway)
-- Netlify Functions + AI Gateway for the multilingual JanSetu AI chat assistant (Gemini 2.5 Flash)
+- Browser local storage and downloadable text records for grievance backup
+- Checked-in local hero illustration (`img/hero.svg`)
+- Client-side JanSetu assistant using the shared scheme catalogue; no API key or server required
 
 ## Languages and AI chat
 
@@ -34,20 +34,16 @@ The header includes a client-side language chooser for English plus Hindi, Benga
 Gujarati, Kannada, Malayalam, Punjabi, Odia, Assamese, and Urdu. The preference is saved in the browser and
 the shared navigation and JanSetu AI interface update without a page reload.
 
-The floating **Chat with JanSetu AI** widget calls `netlify/functions/chat.js`. It uses the Netlify AI Gateway's
-automatically supplied Gemini credentials—do not add an API key to the repository. The Gateway must be enabled
-for the site's credit-based Netlify plan, and the site must have at least one production deploy before AI Gateway
-is available.
+The floating **Chat with JanSetu AI** widget is an independent browser-side assistant. It answers common
+questions about schemes, eligibility, courses, DBT delays and grievance steps from local content. It does not
+send citizen questions or personal information to a server. The legacy Netlify function and configuration are
+retained in the repository for historical compatibility, but the application does not depend on them.
 
 ## Running locally
 
 No build step is required. From the project root:
 
-```bash
-netlify dev --port 8889
-```
-
-Then open `http://localhost:8889`.
+Open `index.html` directly in a browser, or serve the folder with any static web server.
 
 ## Project structure
 
@@ -55,7 +51,7 @@ Then open `http://localhost:8889`.
 index.html          Landing page
 schemes.html         Knowledge base with search/filter + scheme detail modal
 eligibility.html      Plain-language eligibility checker
-grievance.html        Grievance redressal form (Netlify Forms)
+grievance.html        Client-side grievance record builder
 thank-you.html        Grievance submission confirmation page
 courses.html          Official courses, certifications, internships and skills directory
 assets/css/styles.css Small set of custom styles layered on Tailwind
@@ -67,7 +63,7 @@ assets/js/
   grievance.js          Pre-fills the grievance form from query params
   courses-data.js       Official course and learning platform directory
   courses.js            Course search and category filter logic
-img/hero.png          Generated hero illustration
+img/hero.svg          Checked-in citizen-services illustration
 ```
 
 ## Roadmap

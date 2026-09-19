@@ -30,19 +30,15 @@ Government benefits are fragmented across departments, eligibility language is d
 
 - `assets/js/schemes-data.js` is the single source of truth for scheme content and tags.
 - `assets/js/eligibility.js` ranks matches locally and instantly by tag overlap.
-- `netlify/functions/chat.js` keeps AI credentials server-side and applies a safety-oriented system prompt.
-- `grievance.html` is a real static form that can be captured by Netlify Forms.
+- `assets/js/main.js` provides the independent browser-side assistant without an API key or server.
+- `grievance.html` creates a downloadable record so the workflow remains useful on any static host.
 - Every page is independently loadable, which keeps the prototype resilient and easy to deploy.
 
 ## Deployment
 
-Run locally with:
-
-```bash
-netlify dev --port 8889
-```
-
-Configure the deployment environment with the AI gateway variables expected by `netlify/functions/chat.js`. Never commit API keys. The site can also be reviewed as a static prototype without the AI assistant; the scheme catalogue and eligibility matcher remain client-side.
+Run locally by opening `index.html`, or serve the folder with any static web server. The project has no required
+backend, API key, paid credits, or hosting vendor. The legacy Netlify files remain only for reference and are
+not called by the application.
 
 ## Important disclaimer
 
