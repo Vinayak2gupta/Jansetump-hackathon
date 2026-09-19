@@ -26,6 +26,18 @@ them a direct path to escalate delayed benefit transfers or rejected application
 - [Lucide icons](https://lucide.dev/) via CDN
 - Netlify Forms for grievance submissions
 - Netlify Image CDN for the hero illustration (`/img/hero.png`, generated once via Netlify AI Gateway)
+- Netlify Functions + AI Gateway for the multilingual JanSetu AI chat assistant (Gemini 2.5 Flash)
+
+## Languages and AI chat
+
+The header includes a client-side language chooser for English plus Hindi, Bengali, Telugu, Marathi, Tamil,
+Gujarati, Kannada, Malayalam, Punjabi, Odia, Assamese, and Urdu. The preference is saved in the browser and
+the shared navigation and JanSetu AI interface update without a page reload.
+
+The floating **Chat with JanSetu AI** widget calls `netlify/functions/chat.js`. It uses the Netlify AI Gateway's
+automatically supplied Gemini credentials—do not add an API key to the repository. The Gateway must be enabled
+for the site's credit-based Netlify plan, and the site must have at least one production deploy before AI Gateway
+is available.
 
 ## Running locally
 
