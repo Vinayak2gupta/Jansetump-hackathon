@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 424" role="img" aria-labelledby="title desc">
+  <title id="title">Citizens accessing welfare services</title>
+  <desc id="desc">A student, a farmer and a woman using a shared digital kiosk to access government welfare services.</desc>
+  <rect width="760" height="424" rx="24" fill="#e6f6f3"/>
+  <circle cx="650" cy="76" r="44" fill="#f9c66b" opacity=".75"/>
+  <path d="M0 330c92-54 168-24 247 8 80 32 144 42 232 5 105-44 174-40 281 8v73H0z" fill="#b8ddd7"/>
+  <path d="M0 365c110-46 190-10 278 15 84 24 151 19 225-5 103-34 171-26 257 13v36H0z" fill="#8fc9c1"/>
+  <rect x="278" y="126" width="204" height="196" rx="16" fill="#0f3d63"/>
+  <rect x="298" y="146" width="164" height="116" rx="8" fill="#dff7f3"/>
+  <rect x="318" y="166" width="92" height="12" rx="6" fill="#1a5f8f"/>
+  <rect x="318" y="191" width="124" height="9" rx="4" fill="#8fc9c1"/>
+  <rect x="318" y="211" width="78" height="9" rx="4" fill="#8fc9c1"/>
+  <circle cx="422" cy="216" r="18" fill="#f2a65a"/>
+  <path d="M350 322v-32h60v32" fill="#0b2d4d"/>
+  <rect x="310" y="322" width="140" height="12" rx="6" fill="#0b2d4d"/>
+  <rect x="327" y="334" width="12" height="48" rx="6" fill="#0b2d4d"/>
+  <rect x="421" y="334" width="12" height="48" rx="6" fill="#0b2d4d"/>
+  <g transform="translate(104 126)">
+    <circle cx="57" cy="32" r="25" fill="#9b5e3d"/>
+    <path d="M31 27c3-27 51-34 56 4-15-10-39-12-56-4z" fill="#27364a"/>
+    <path d="M28 79c5-32 75-32 82 0l-8 91H36z" fill="#f0b34f"/>
+    <path d="M36 170h26v46H36zM68 170h26v46H68z" fill="#244b6b"/>
+    <path d="M37 86l-31 49M99 86l28 43" stroke="#9b5e3d" stroke-width="14" stroke-linecap="round"/>
+    <rect x="35" y="99" width="53" height="34" rx="4" fill="#dff7f3" stroke="#0f3d63" stroke-width="4"/>
+    <path d="M44 109h34M44 119h23" stroke="#1a5f8f" stroke-width="4" stroke-linecap="round"/>
+  </g>
+  <g transform="translate(540 136)">
+    <circle cx="63" cy="28" r="25" fill="#a96946"/>
+    <path d="M38 24c5-31 51-33 57 2-15-7-38-7-57-2z" fill="#633e35"/>
+    <path d="M31 77c8-31 74-31 84 0l-9 96H40z" fill="#e77b62"/>
+    <path d="M43 173h25v45H43zM76 173h25v45H76z" fill="#2e5872"/>
+    <path d="M37 88l-29 47M108 89l28 43" stroke="#a96946" stroke-width="14" stroke-linecap="round"/>
+    <path d="M34 107h58v65H34z" fill="#f8d999" opacity=".9"/>
+    <path d="M44 120h38M44 133h27" stroke="#b96d42" stroke-width="4" stroke-linecap="round"/>
+  </g>
+  <g transform="translate(194 276)">
+    <path d="M0 32c28-28 62-28 90 0" fill="none" stroke="#5b3a2e" stroke-width="15" stroke-linecap="round"/>
+    <circle cx="45" cy="38" r="22" fill="#a96946"/>
+    <path d="M15 84c9-28 52-28 61 0l-5 50H20z" fill="#5da3a0"/>
+    <path d="M26 134h22v43H26zM55 134h22v43H55z" fill="#f0b34f"/>
+    <path d="M23 93l-32 30M70 93l29 30" stroke="#a96946" stroke-width="13" stroke-linecap="round"/>
+  </g>
+  <g fill="#0f3d63">
+    <circle cx="91" cy="85" r="5"/><circle cx="112" cy="72" r="4"/><circle cx="136" cy="91" r="6"/>
+  </g>
+</svg>
