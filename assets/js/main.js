@@ -85,13 +85,22 @@
     document.body.appendChild(wrapper);
     var launcher = document.getElementById('chatbot-launcher'); var panel = document.getElementById('chatbot-panel'); var messages = document.getElementById('chatbot-messages'); var input = document.getElementById('chatbot-input'); var history = [];
     function addMessage(message, type) { var item = document.createElement('div'); item.className = 'chatbot-message ' + type; item.textContent = message; messages.appendChild(item); messages.scrollTop = messages.scrollHeight; }
+    function localChatReply(question) {
+      var text = question.toLowerCase();
+      if (/farmer|farming|crop|किसान|फसल/.test(text)) return 'For farming support, explore PM-KISAN, Mukhyamantri Kisan Kalyan Yojana, crop insurance and Kisan Credit Card in the Knowledge Base. Verify current rules on the linked official portal.';
+      if (/student|scholarship|college|school|छात्र|स्कॉलरशिप/.test(text)) return 'For education support, check MMVY, Post-Matric Scholarship, Gaon Ki Beti and Central Sector Scholarship. Use the Eligibility Checker with your course, marks and income details.';
+      if (/woman|women|girl|maternity|महिला|लड़की/.test(text)) return 'For women and girl-child support, explore Ladli Behna, Sukanya Samriddhi and Matru Vandana. Open the scheme details to verify current eligibility.';
+      if (/dbt|delay|payment|rejected|grievance|complaint|शिकायत|भुगतान/.test(text)) return 'For a delayed payment or rejected application, open Grievance Redressal. Include the scheme, issue type, timeline and response received. Never share Aadhaar, OTP, passwords or bank details.';
+      if (/course|learn|skill|कोर्स|पढ़/.test(text)) return 'Open Find Courses for NPTEL, SWAYAM, DIKSHA, Skill India and employment-learning resources.';
+      return 'I can help you explore welfare schemes, scholarships, farm support, eligibility and grievance steps. Try asking about farmer support, scholarships or a delayed DBT payment.';
+    }
     function setOpen(open) { panel.classList.toggle('hidden', !open); launcher.setAttribute('aria-expanded', String(open)); if (open) input.focus(); }
     launcher.addEventListener('click', function () { setOpen(panel.classList.contains('hidden')); });
     document.getElementById('chatbot-close').addEventListener('click', function () { setOpen(false); launcher.focus(); });
     document.getElementById('chatbot-form').addEventListener('submit', async function (event) {
       event.preventDefault(); var question = input.value.trim(); if (!question) return; addMessage(question, 'user'); history.push({ role: 'user', content: question }); input.value = ''; input.disabled = true;
       try { var response = await fetch('/api/chat', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ messages: history.slice(-8), language: getLanguage() }) }); var data = await response.json(); if (!response.ok) throw new Error(data.error || 'Request failed'); addMessage(data.reply, 'bot'); history.push({ role: 'assistant', content: data.reply }); }
-      catch (error) { addMessage('I could not connect right now. Please try again, or use the scheme search and grievance form.', 'bot'); }
+      catch (error) { addMessage(localChatReply(question), 'bot'); }
       finally { input.disabled = false; input.focus(); }
     });
     addMessage(t('chatHint'), 'bot'); if (window.lucide) window.lucide.createIcons();

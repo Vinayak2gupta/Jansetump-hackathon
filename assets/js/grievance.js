@@ -8,6 +8,18 @@
   var ticketScheme = document.getElementById('ticket-scheme');
   var ticketDepartment = document.getElementById('ticket-department');
   var ticketForm = document.getElementById('ticket-form');
+  var grievanceForm = document.getElementById('grievance-form');
+  var downloadButton = document.getElementById('download-grievance');
+  function downloadGrievance() {
+    if (!grievanceForm) return;
+    var data = new FormData(grievanceForm);
+    var lines = ['JanSetu grievance record', 'Created: ' + new Date().toISOString(), ''];
+    data.forEach(function (value, key) { if (key !== 'bot-field' && key !== 'form-name') lines.push(key + ': ' + value); });
+    lines.push('', 'This is an independent prototype record. Verify details and submit it through the relevant official channel.');
+    var blob = new Blob([lines.join('\n')], { type: 'text/plain;charset=utf-8' });
+    var link = document.createElement('a'); link.href = URL.createObjectURL(blob); link.download = 'jansetu-grievance-record.txt'; link.click(); window.setTimeout(function () { URL.revokeObjectURL(link.href); }, 1000);
+  }
+  if (downloadButton) downloadButton.addEventListener('click', downloadGrievance);
   if (!input || !result) return;
   function track() { var value = input.value.trim(); if (!value) return; result.classList.remove('hidden'); status.textContent = value.includes('4409') ? 'Resolved / Payment Released' : 'In Department Review'; ticketScheme.textContent = value.includes('4409') ? 'Kisan Kalyan Yojana DBT second tranche delay' : 'MMVY engineering tuition disbursement delay'; ticketDepartment.textContent = value.includes('4409') ? 'Revenue & Agriculture Directorate, Gwalior' : 'Directorate of Technical Education, Bhopal'; }
   ticketForm.addEventListener('submit', function (event) { event.preventDefault(); track(); });
