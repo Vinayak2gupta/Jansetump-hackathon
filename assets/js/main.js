@@ -49,14 +49,6 @@
     select.addEventListener('change', function () { localStorage.setItem('jansetu-language', select.value); translateSharedUI(); initChatbot(); translatePageContent(); });
     theme.parentNode.insertBefore(label, theme);
   }
-  function normalizeInternalLinks() {
-    var base = document.querySelector('base');
-    if (!base) return;
-    var prefix = base.getAttribute('href') || '/';
-    document.querySelectorAll('a[href^="/"]').forEach(function (link) {
-      link.setAttribute('href', prefix + link.getAttribute('href').slice(1));
-    });
-  }
   function initChatbot() {
     var existing = document.getElementById('jansetu-chatbot');
     if (existing) { existing.remove(); }
@@ -116,13 +108,12 @@
     });
     addLanguageSwitcher();
     translateSharedUI();
-    normalizeInternalLinks();
     initChatbot();
     translatePageContent();
     window.setTimeout(translatePageContent, 120);
     var translateTimer;
     var main = document.querySelector('main');
-    if (main && window.MutationObserver) new MutationObserver(function () { normalizeInternalLinks(); window.clearTimeout(translateTimer); translateTimer = window.setTimeout(translatePageContent, 180); }).observe(main, { childList: true, subtree: true });
+    if (main && window.MutationObserver) new MutationObserver(function () { window.clearTimeout(translateTimer); translateTimer = window.setTimeout(translatePageContent, 180); }).observe(main, { childList: true, subtree: true });
 
     var themeToggle = document.getElementById('theme-toggle');
     if (themeToggle) {
