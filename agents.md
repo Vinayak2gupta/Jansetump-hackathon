@@ -15,22 +15,15 @@ product description and file map.
 - All scheme content lives in one place: `assets/js/schemes-data.js` (`SCHEMES` array + `TAG_SYNONYMS` map
   + `CATEGORIES` list). Both `schemes.js` (knowledge base) and `eligibility.js` (matcher) read from this
   same file, so it is the single source of truth — update scheme data there, not inline in HTML.
-- The eligibility "engine" is deliberately simple: free text is lower-cased and checked for substring
-  matches against `TAG_SYNONYMS`, then schemes are ranked by tag overlap. It is not an LLM call — no server
-  round-trip, so it works offline and instantly. If this is ever upgraded to an LLM-backed matcher, it
-  would need a Netlify Function (see the `netlify-functions` and `netlify-ai-gateway` skills) since API
-  keys can't live in client-side JS.
+- The eligibility "engine" and chatbot are deliberately simple: free text is lower-cased and checked for
+  substring matches against `TAG_SYNONYMS`, then schemes are ranked by tag overlap. They are not LLM calls,
+  so they work offline and instantly without a server round-trip or API key.
 - Cross-page context (which scheme a grievance relates to) is passed via URL query params
   (`?scheme=<id>&name=<Scheme+Name>`), read by `grievance.js` on load. There is no shared client-side
   state beyond the URL.
-- The grievance form is a real static `<form data-netlify="true">` — Netlify's build bot detects it
-  directly at deploy time because it's plain HTML, no SPA skeleton trick needed. It submits with a normal
-  full-page POST to `/thank-you.html` (no AJAX), which is the simplest reliable pattern for a static
-  multi-page site.
-- The hero illustration (`img/hero.png`) was generated once via Netlify AI Gateway (Gemini image model)
-  during initial build and is checked into the repo as a static asset. It is served through
-  `/.netlify/images?url=/img/hero.png...` (Netlify Image CDN) rather than directly, for responsive
-  resizing/format negotiation. There is no runtime image-generation feature — don't add one unless asked.
+- The grievance form is client-only: it stores a copy in local storage and downloads a text record for the
+  citizen to submit through an official channel. It does not transmit personal data to this site.
+- The hero illustration (`img/hero.png`) is checked into the repo and served directly as a static asset.
 
 ## Conventions
 

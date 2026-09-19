@@ -35,33 +35,7 @@
     });
     document.querySelectorAll('[data-i18n-key]').forEach(function (element) { element.textContent = t(element.getAttribute('data-i18n-key')); });
   }
-  async function translatePageContent() {
-    var language = getLanguage();
-    if (language === 'en') return;
-    var cacheKey = 'jansetu-ui-' + language + '-' + window.location.pathname;
-    var cached = JSON.parse(localStorage.getItem(cacheKey) || 'null');
-    var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
-    var nodes = []; var node;
-    while ((node = walker.nextNode())) {
-      var parent = node.parentElement;
-      var value = node.nodeValue.trim();
-      if (!value || !parent || parent.closest('#jansetu-chatbot, script, style, option, [data-lucide]') || parent.closest('header')) continue;
-      if (!node.__jansetuSource) node.__jansetuSource = node.nodeValue;
-      nodes.push(node);
-    }
-    var source = nodes.map(function (item) { return item.__jansetuSource; });
-    var signature = JSON.stringify(source);
-    function apply(translations) { nodes.forEach(function (item, index) { if (translations[index]) item.nodeValue = translations[index]; }); }
-    if (cached && cached.source === signature && Array.isArray(cached.translations)) { apply(cached.translations); return; }
-    try {
-      var batches = [];
-      for (var offset = 0; offset < source.length; offset += 60) batches.push(source.slice(offset, offset + 60));
-      var responses = await Promise.all(batches.map(function (texts) { return fetch('/api/chat', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ mode: 'translate-ui', language: language, texts: texts }) }); }));
-      var data = await Promise.all(responses.map(function (response) { return response.json().then(function (payload) { return { ok: response.ok, payload: payload }; }); }));
-      var translations = data.reduce(function (all, item) { return all.concat(item.payload.translations || []); }, []);
-      if (data.some(function (item) { return !item.ok; }) || translations.length !== source.length) throw new Error('Translation unavailable');
-      localStorage.setItem(cacheKey, JSON.stringify({ source: signature, translations: translations })); apply(translations);
-    } catch (error) { console.warn('JanSetu translation unavailable', error); }
+  function translatePageContent() {
   }
   function addLanguageSwitcher() {
     if (document.getElementById('language-switcher')) return;
@@ -83,16 +57,36 @@
     wrapper.innerHTML = '<button type="button" class="chatbot-launcher" id="chatbot-launcher" aria-expanded="false" aria-controls="chatbot-panel"><i data-lucide="message-circle" class="h-4 w-4"></i><span>' + t('chat') + '</span></button>' +
       '<section class="chatbot-panel hidden" id="chatbot-panel" aria-label="' + t('chatTitle') + '"><div class="chatbot-heading"><div><h2>' + t('chatTitle') + '</h2><p>' + t('chatHint') + '</p></div><button type="button" id="chatbot-close" aria-label="' + t('close') + '"><i data-lucide="x" class="h-4 w-4"></i></button></div><div class="chatbot-messages" id="chatbot-messages" aria-live="polite"></div><form id="chatbot-form"><label for="chatbot-input" class="sr-only">' + t('chat') + '</label><input id="chatbot-input" maxlength="1200" placeholder="' + t('placeholder') + '" autocomplete="off" required><button type="submit" aria-label="' + t('send') + '"><i data-lucide="send" class="h-4 w-4"></i></button></form><p class="chatbot-disclaimer">' + t('disclaimer') + '</p></section>';
     document.body.appendChild(wrapper);
-    var launcher = document.getElementById('chatbot-launcher'); var panel = document.getElementById('chatbot-panel'); var messages = document.getElementById('chatbot-messages'); var input = document.getElementById('chatbot-input'); var history = [];
+    var launcher = document.getElementById('chatbot-launcher'); var panel = document.getElementById('chatbot-panel'); var messages = document.getElementById('chatbot-messages'); var input = document.getElementById('chatbot-input');
     function addMessage(message, type) { var item = document.createElement('div'); item.className = 'chatbot-message ' + type; item.textContent = message; messages.appendChild(item); messages.scrollTop = messages.scrollHeight; }
+    function localReply(question) {
+      var text = question.toLowerCase();
+      var language = getLanguage();
+      if (/hello|hi|namaste|नमस्ते/.test(text)) return language === 'hi' ? 'नमस्ते! मैं योजनाओं, पात्रता और शिकायत प्रक्रिया के बारे में मदद कर सकता हूँ।' : 'Hello! I can help with schemes, eligibility, DBT delays and grievance steps.';
+      if (/grievance|complaint|शिकायत|dbt|payment|delay|stuck|rejected|error/.test(text)) return language === 'hi' ? 'अपनी शिकायत दर्ज करने के लिए Grievance Redressal पेज खोलें। वहाँ आप एक स्थानीय grievance record बना सकते हैं और आधिकारिक चैनल, जैसे MP CM Helpline 181 या CPGRAMS, पर भेज सकते हैं।' : 'Open Grievance Redressal to create a grievance record. For official escalation, use the MP CM Helpline at 181 or CPGRAMS at pgportal.gov.in.';
+      if (/course|learn|skill|कोर्स|पढ़ाई/.test(text)) return language === 'hi' ? 'Find Courses पेज पर NPTEL, SWAYAM, DIKSHA, Skill India और रोजगार संसाधन देखें।' : 'Open Find Courses to browse NPTEL, SWAYAM, DIKSHA, Skill India and employment resources.';
+      var schemes = typeof SCHEMES !== 'undefined' ? SCHEMES : [];
+      var synonyms = typeof TAG_SYNONYMS !== 'undefined' ? TAG_SYNONYMS : {};
+      var matches = schemes.map(function (scheme) {
+        var score = 0;
+        var haystack = (scheme.name + ' ' + scheme.category + ' ' + scheme.summary + ' ' + scheme.eligibility + ' ' + scheme.tags.join(' ')).toLowerCase();
+        if (haystack.indexOf(text) >= 0) score += 4;
+        Object.keys(synonyms).forEach(function (tag) { if (synonyms[tag].some(function (word) { return text.indexOf(word) >= 0; }) && scheme.tags.indexOf(tag) >= 0) score += 2; });
+        return { scheme: scheme, score: score };
+      }).filter(function (item) { return item.score > 0; }).sort(function (a, b) { return b.score - a.score; }).slice(0, 3);
+      if (matches.length) {
+        var answer = (language === 'hi' ? 'आपके प्रश्न से जुड़ी योजनाएँ:\n' : 'These schemes may match your question:\n');
+        answer += matches.map(function (item) { return item.scheme.name + ' — ' + item.scheme.benefit + '. Eligibility: ' + item.scheme.eligibility + '. Official details: ' + item.scheme.link; }).join('\n');
+        return answer;
+      }
+      return language === 'hi' ? 'मैं JanSetu के scheme catalogue, eligibility checker और grievance process के बारे में बता सकता हूँ। उदाहरण के लिए पूछें: किसान के लिए योजना, scholarship eligibility, या DBT delay.' : 'I can help with the JanSetu scheme catalogue, eligibility checker and grievance process. Try asking about farmer schemes, scholarship eligibility or a DBT delay.';
+    }
     function setOpen(open) { panel.classList.toggle('hidden', !open); launcher.setAttribute('aria-expanded', String(open)); if (open) input.focus(); }
     launcher.addEventListener('click', function () { setOpen(panel.classList.contains('hidden')); });
     document.getElementById('chatbot-close').addEventListener('click', function () { setOpen(false); launcher.focus(); });
-    document.getElementById('chatbot-form').addEventListener('submit', async function (event) {
-      event.preventDefault(); var question = input.value.trim(); if (!question) return; addMessage(question, 'user'); history.push({ role: 'user', content: question }); input.value = ''; input.disabled = true;
-      try { var response = await fetch('/api/chat', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ messages: history.slice(-8), language: getLanguage() }) }); var data = await response.json(); if (!response.ok) throw new Error(data.error || 'Request failed'); addMessage(data.reply, 'bot'); history.push({ role: 'assistant', content: data.reply }); }
-      catch (error) { addMessage('I could not connect right now. Please try again, or use the scheme search and grievance form.', 'bot'); }
-      finally { input.disabled = false; input.focus(); }
+    document.getElementById('chatbot-form').addEventListener('submit', function (event) {
+      event.preventDefault(); var question = input.value.trim(); if (!question) return; addMessage(question, 'user'); input.value = ''; input.disabled = true;
+      window.setTimeout(function () { addMessage(localReply(question), 'bot'); input.disabled = false; input.focus(); }, 180);
     });
     addMessage(t('chatHint'), 'bot'); if (window.lucide) window.lucide.createIcons();
   }
