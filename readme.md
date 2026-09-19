@@ -10,6 +10,8 @@ them a direct path to escalate delayed benefit transfers or rejected application
 - **Knowledge Base** (`schemes.html`) — a searchable, filterable catalogue of state (Madhya Pradesh) and
   central schemes across Higher Education, Scholarships, Agriculture, and Women Welfare, with a detail
   view for each scheme.
+- **Courses & Learning** (`courses.html`) — searchable links to official NPTEL, SWAYAM, DIKSHA, Skill India,
+  AICTE internship, National Career Service, and Madhya Pradesh employment-learning resources.
 - **Eligibility Checker** (`eligibility.html`) — citizens describe their situation in plain language and
   get matched to relevant schemes via a client-side keyword/tag matching engine.
 - **Grievance Redressal** (`grievance.html`) — a form (powered by Netlify Forms) for reporting delayed
@@ -43,6 +45,7 @@ schemes.html         Knowledge base with search/filter + scheme detail modal
 eligibility.html      Plain-language eligibility checker
 grievance.html        Grievance redressal form (Netlify Forms)
 thank-you.html        Grievance submission confirmation page
+courses.html          Official courses, certifications, internships and skills directory
 assets/css/styles.css Small set of custom styles layered on Tailwind
 assets/js/
   main.js             Shared nav + icon behaviour across every page
@@ -50,6 +53,8 @@ assets/js/
   schemes.js           Knowledge base search, filter and modal logic
   eligibility.js        Plain-language matching engine
   grievance.js          Pre-fills the grievance form from query params
+  courses-data.js       Official course and learning platform directory
+  courses.js            Course search and category filter logic
 img/hero.png          Generated hero illustration
 ```
 

@@ -1,0 +1,46 @@
+html { scroll-behavior: smooth; }
+body { min-height: 100vh; }
+.skip-link:focus { left: 1rem; z-index: 60; }
+.nav-link[aria-current="page"] { color: #0f3d63; font-weight: 700; }
+.scheme-card { transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease; }
+.scheme-card:hover { transform: translateY(-2px); }
+.modal-backdrop { background: rgba(15, 23, 42, 0.58); backdrop-filter: blur(2px); }
+@keyframes fade-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+.animate-fade-in { animation: fade-in 500ms ease both; }
+
+body.dark-mode { background: #0f172a !important; color: #e2e8f0 !important; }
+body.dark-mode header,
+body.dark-mode footer,
+body.dark-mode .bg-white { background-color: #172033 !important; border-color: #334155 !important; }
+body.dark-mode .bg-slate-50 { background-color: #111827 !important; }
+body.dark-mode .bg-gradient-to-b { background-image: linear-gradient(to bottom, #111827, #0f172a) !important; }
+body.dark-mode .text-slate-900,
+body.dark-mode .text-slate-800,
+body.dark-mode .text-gov-900 { color: #f8fafc !important; }
+body.dark-mode .text-slate-700,
+body.dark-mode .text-slate-600 { color: #cbd5e1 !important; }
+body.dark-mode .text-slate-500,
+body.dark-mode .text-slate-400 { color: #94a3b8 !important; }
+body.dark-mode .border-slate-200,
+body.dark-mode .border-slate-300,
+body.dark-mode .border-slate-100 { border-color: #334155 !important; }
+body.dark-mode input,
+body.dark-mode textarea,
+body.dark-mode select { background-color: #0f172a !important; color: #f8fafc !important; border-color: #475569 !important; }
+body.dark-mode input,
+body.dark-mode textarea { background-color: #0f172a !important; color: #f8fafc !important; border-color: #475569 !important; }
+body.dark-mode input::placeholder,
+body.dark-mode textarea::placeholder { color: #94a3b8 !important; }
+body.dark-mode .scheme-card,
+body.dark-mode .modal-backdrop + div { background-color: #172033 !important; }
+body.dark-mode .bg-teal-50,
+body.dark-mode .bg-amber-50 { background-color: #243449 !important; }
+body.dark-mode .text-teal-700,
+body.dark-mode .text-amber-700 { color: #5eead4 !important; }
+body.dark-mode .text-teal-600,
+body.dark-mode .text-teal-700 { color: #5eead4 !important; }
+body.dark-mode .hover\:bg-slate-100:hover { background-color: #263449 !important; }
+.theme-toggle { display: inline-flex; align-items: center; justify-content: center; border: 1px solid #cbd5e1; border-radius: 0.5rem; padding: 0.5rem; color: #0f3d63; background: #fff; }
+.theme-toggle:hover { background: #f1f5f9; }
+body.dark-mode .theme-toggle { border-color: #475569; color: #fde68a; background: #172033; }
+body.dark-mode .theme-toggle:hover { background: #263449; }
