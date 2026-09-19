@@ -79,3 +79,9 @@ This prototype ships as a complete, self-contained client experience per its ori
   scheme details without a code change.
 - Persist grievance submissions to a database and add status tracking so citizens can look up a case later.
 - Swap the keyword-based eligibility matcher for an LLM-backed one for more nuanced free-text understanding.
+
+## Hackathon submission
+
+See `HACKATHON_SUBMISSION.md` for the one-minute pitch, three-minute judging walkthrough, technical proof
+points, and deployment notes. The recommended demo order is eligibility matching, scheme detail, grievance
+context, then the JanSetu AI assistant.
