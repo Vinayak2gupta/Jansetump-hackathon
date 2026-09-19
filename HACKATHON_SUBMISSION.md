@@ -37,8 +37,7 @@ Government benefits are fragmented across departments, eligibility language is d
 ## Deployment
 
 Run locally by opening `index.html`, or serve the folder with any static web server. The project has no required
-backend, API key, paid credits, or hosting vendor. The legacy Netlify files remain only for reference and are
-not called by the application.
+backend, API key, paid credits, or hosting vendor.
 
 ## Important disclaimer
 

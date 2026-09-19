@@ -36,8 +36,7 @@ the shared navigation and JanSetu AI interface update without a page reload.
 
 The floating **Chat with JanSetu AI** widget is an independent browser-side assistant. It answers common
 questions about schemes, eligibility, courses, DBT delays and grievance steps from local content. It does not
-send citizen questions or personal information to a server. The legacy Netlify function and configuration are
-retained in the repository for historical compatibility, but the application does not depend on them.
+send citizen questions or personal information to a server.
 
 ## Running locally
 
