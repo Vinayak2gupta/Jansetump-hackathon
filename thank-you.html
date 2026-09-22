@@ -32,7 +32,7 @@
       <i data-lucide="check-circle-2" class="h-8 w-8 text-teal-600"></i>
     </span>
     <h1 class="mt-6 text-3xl font-bold text-gov-900">Your grievance has been received</h1>
-    <p class="mt-3 text-slate-600">
+    <p id="submission-message" class="mt-3 text-slate-600">
       Thank you for reporting this. Your submission — with the scheme context you provided — has been logged.
       You should expect an update on the mobile number or email you shared, typically within 7 working days.
     </p>
@@ -49,5 +49,16 @@
       </a>
     </div>
   </main>
+  <script>
+    (function () {
+      var params = new URLSearchParams(window.location.search);
+      var ticket = params.get('ticket');
+      var online = params.get('online') === 'true';
+      var message = document.getElementById('submission-message');
+      if (ticket && message) message.textContent = online
+        ? 'Your grievance was saved with ticket ' + ticket + ' and a copy was downloaded for your records.'
+        : 'A local copy was downloaded with ticket ' + ticket + '. Online submission was unavailable, so submit the copy through the relevant official channel.';
+    }());
+  </script>
 </body>
 </html>

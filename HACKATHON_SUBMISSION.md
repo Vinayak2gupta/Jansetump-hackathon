@@ -32,6 +32,8 @@ Government benefits are fragmented across departments, eligibility language is d
 - `assets/js/eligibility.js` ranks matches locally and instantly by tag overlap.
 - `assets/js/main.js` provides the independent browser-side assistant without an API key or server.
 - `grievance.html` creates a downloadable record so the workflow remains useful on any static host.
+- `supabase-schema.sql` and the optional Supabase connection add persistent grievance storage without exposing
+	an administrative secret in the browser.
 - Every page is independently loadable, which keeps the prototype resilient and easy to deploy.
 
 ## Deployment

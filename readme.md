@@ -38,6 +38,13 @@ The floating **Chat with JanSetu AI** widget is an independent browser-side assi
 questions about schemes, eligibility, courses, DBT delays and grievance steps from local content. It does not
 send citizen questions or personal information to a server.
 
+## Optional grievance database
+
+The grievance form can submit records to Supabase when the project URL and publishable key are configured in
+`assets/js/supabase-config.js`. Run `supabase-schema.sql` once in the Supabase SQL Editor first. The public
+policy permits inserts only; it does not expose submitted citizen records to anonymous visitors. If Supabase
+is unavailable, the form still downloads a local grievance record and continues to the confirmation page.
+
 ## Running locally
 
 No build step is required. From the project root:
